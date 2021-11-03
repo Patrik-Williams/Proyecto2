@@ -5,6 +5,7 @@
  */
 package com.ulatina.service;
 
+import com.ulatina.model.Product;
 import com.ulatina.model.InventoryStatus;
 import java.util.ArrayList;
 import java.util.List;
