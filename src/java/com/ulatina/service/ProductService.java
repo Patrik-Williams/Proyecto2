@@ -5,22 +5,22 @@
  */
 package com.ulatina.service;
 
+
 import com.ulatina.model.InventoryStatus;
+import com.ulatina.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import static org.eclipse.jdt.internal.compiler.env.IModuleAwareNameEnvironment.LookupStrategy.Named;
+
 
 /**
  *
  * @author Ian
  */
 @ManagedBean (name = "productService")
-
 @ApplicationScoped
 public class ProductService {
 
