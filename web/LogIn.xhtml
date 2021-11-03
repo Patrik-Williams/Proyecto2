@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body> 
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <p:messages id="messages" showDetail="true" closable="true"/>
+
+            <center>
+                <div id='mydiv' style = "position:relative; left:0px; top:250px;">
+                    <h:panelGrid columns="1" cellpadding="10" >
+                        
+                        Correo Electrónico:
+                        <p:inputText style="width: 400px" value="#{loginController.correo}" required="true" requiredMessage="El correo es requerido"/>
+                        Contraseña: 
+                        <p:password style="width: 400px" value="#{loginController.contrasenna}" required="true" requiredMessage="La contraseña es requerida"/>
+
+
+                    </h:panelGrid>    
+                    <h:outputLabel/>  
+                    <p:commandButton  value="Ingresar" actionListener="#{loginController.ingresar()}" update="growl"/>
+                </div>    
+            </center>
+
+        </h:form>
+    </h:body>
+</html>
