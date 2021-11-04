@@ -52,7 +52,7 @@ public class CarouselView implements Serializable {
     
     
      public void ingresar() {
-        System.out.println("estoy en el insert");
+        
         this.redireccionar("/faces/LogIn.xhtml");
 
     }

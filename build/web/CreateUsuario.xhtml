@@ -18,18 +18,25 @@ and open the template in the editor.
             <p:messages id="messages" showDetail="true" closable="true"/>
 
             <center>
-                <div id='mydiv' style = "position:relative; left:0px; top:250px;">
+                <div id='mydiv' style = "position:relative; left:0px; top:100px;">
                     <h:panelGrid columns="1" cellpadding="10" >
                         
-                        Correo Electrónico:
-                        <p:inputText style="width: 400px" value="#{loginController.correo}" required="true" requiredMessage="El correo es requerido"/>
+                        Nombre:
+                        <p:inputText style="width: 400px"  required="true" requiredMessage="El nombre es requerido"/>
+                        Apellido: 
+                        <p:password style="width: 400px"  required="true" requiredMessage="El apellido es requerido"/>
+                        Correo: 
+                        <p:password style="width: 400px"  required="true" requiredMessage="El correo es requerido"/>
                         Contraseña: 
-                        <p:password style="width: 400px" value="#{loginController.contrasenna}" required="true" requiredMessage="La contraseña es requerida"/>
+                        <p:password style="width: 400px"  required="true" requiredMessage="La contraseña es requerida"/>
+                        Cedula: 
+                        <p:password style="width: 400px"  required="true" requiredMessage="La cédula es requerida"/>
+                       
 
 
                     </h:panelGrid>    
                     <h:outputLabel/>  
-                    <p:commandButton  value="Ingresar" actionListener="#{loginController.ingresarAdm()}" update="growl"/>
+                    <p:commandButton  value="Ingresar" update="growl"/>
                 </div>    
             </center>
 
