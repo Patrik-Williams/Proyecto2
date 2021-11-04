@@ -16,71 +16,26 @@ import java.util.List;
  */
 public class Product implements Serializable {
 
-    private int id;
-    private String code;
-    private String name;
-    private String description;
+   
+    private String codigo;
+    private String nombre;
+    private String marca;
+    private String descripcion;
+    private int cantidad;
+    private String categoria;
+    private double precio;
     private String image;
-    private double price;
-    private String category;
-    private int quantity;
-    private InventoryStatus inventoryStatus;
-    private int rating;
-    //private List<Order> orders;
 
-    public Product() {
-    }
-
-    public Product(int id, String code, String name, String description, String image, double price, String category, int quantity,
-            InventoryStatus inventoryStatus, int rating) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.price = price;
-        this.category = category;
-        this.quantity = quantity;
-        this.inventoryStatus = inventoryStatus;
-        this.rating = rating;
-    }
-
-    @Override
-    public Product clone() {
-        return new Product(getId(), getCode(), getName(), getDescription(), getImage(), getPrice(), getCategory(), getQuantity(),
-                getInventoryStatus(), getRating());
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public Product(String codigo, String nombre, String marca, String descripcion, int cantidad,String categoria, double precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.descripcion =  descripcion;
+        this.cantidad = cantidad;
+        this.categoria = categoria;
+        this.precio = precio;
+        
+        
     }
 
     public String getImage() {
@@ -91,45 +46,76 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public double getPrice() {
-        return price;
+    @Override
+    public Product clone() {
+        return new Product(getCodigo(), getNombre(), getMarca(), getDescripcion(), getCantidad(), getCategoria(), getPrecio());
+    }
+    
+    
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getCategory() {
-        return category;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public InventoryStatus getInventoryStatus() {
-        return inventoryStatus;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setInventoryStatus(InventoryStatus inventoryStatus) {
-        this.inventoryStatus = inventoryStatus;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public int getRating() {
-        return rating;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+  
+    //private List<Order> orders;
+
+    public Product() {
+    }
+
+    
+
+   
 
     /*public List<Order> getOrders() {
         return this.orders;
@@ -143,7 +129,7 @@ public class Product implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((code == null) ? 0 : code.hashCode());
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
         return result;
     }
 
@@ -159,11 +145,11 @@ public class Product implements Serializable {
             return false;
         }
         Product other = (Product) obj;
-        if (code == null) {
-            return other.code == null;
+        if (codigo == null) {
+            return other.codigo == null;
         }
         else {
-            return code.equals(other.code);
+            return codigo.equals(other.codigo);
         }
     }
 

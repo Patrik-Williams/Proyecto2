@@ -43,7 +43,7 @@ and open the template in the editor.
 
                 <p:dataTable id="dt-products" widgetVar="dtProducts" var="product" value="#{crudView.products}"
                              reflow="true" styleClass="products-table"
-                             selection="#{crudView.selectedProducts}" rowKey="#{product.id}" paginator="true"
+                             selection="#{crudView.selectedProducts}" rowKey="#{product.codigo}" paginator="true"
                              rows="10" rowSelectMode="add" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
@@ -65,31 +65,30 @@ and open the template in the editor.
 
                     <p:column selectionMode="multiple" exportable="false"></p:column>
 
-                    <p:column headerText="Code" sortBy="#{product.code}" filterBy="#{product.code}">
-                        <h:outputText value="#{product.code}"/>
+                    <p:column headerText="Codigo" sortBy="#{product.codigo}" filterBy="#{product.codigo}">
+                        <h:outputText value="#{product.codigo}"/>
                     </p:column>
-                    <p:column headerText="Name" sortBy="#{product.name}" filterBy="#{product.name}">
-                        <h:outputText value="#{product.name}"/>
+                    <p:column headerText="Nombre" sortBy="#{product.nombre}" filterBy="#{product.nombre}">
+                        <h:outputText value="#{product.nombre}"/>
                     </p:column>
-                    <p:column headerText="Image" exportable="false">
-                        <p:graphicImage name="images/product/#{product.image}" library="demo"
-                                        styleClass="product-image"/>
+                    <p:column headerText="Marca" exportable="false">
+                        <h:outputText value="marca"/>
                     </p:column>
-                    <p:column headerText="Price" sortBy="#{product.price}">
-                        <h:outputText value="#{product.price}" style="font-weight: 700">
+                    <p:column headerText="Precio" sortBy="#{product.precio}">
+                        <h:outputText value="#{product.precio}" style="font-weight: 700">
                             <f:convertNumber currencySymbol="$" type="currency"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Category" sortBy="#{product.category}" filterBy="#{product.category}">
-                        <h:outputText value="#{product.category}"/>
+                    <p:column headerText="Categoria" sortBy="#{product.categoria}" filterBy="#{product.categoria}">
+                        <h:outputText value="#{product.categoria}"/>
                     </p:column>
-                    <p:column headerText="Reviews" sortBy="#{product.rating}">
-                        <p:rating value="#{product.rating}" readonly="true"/>
+                    <p:column headerText="Descripción" sortBy="#{product.descripcion}">
+                        <h:outputText value="#{product.descripcion}"/>
                     </p:column>
-                    <p:column headerText="Status" sortBy="#{product.inventoryStatus}"
-                              filterBy="#{product.inventoryStatus}">
-                        <h:outputText styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
-                                      value="#{product.inventoryStatus.text}"/>
+                    <p:column headerText="Cantidad" sortBy="#{product.cantidad}"
+                              filterBy="#{product.cantidad}">
+                        <h:outputText styleClass="product-badge status-#{product.cantidad}"
+                                      value="#{product.cantidad}"/>
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
@@ -115,15 +114,15 @@ and open the template in the editor.
                                             rendered="#{not empty crudView.selectedProduct.image}"/>
                             <div class="p-field">
                                 <p:outputLabel for="name">Name</p:outputLabel>
-                                <p:inputText id="name" value="#{crudView.selectedProduct.name}" required="true"/>
+                                <p:inputText id="name" value="#{crudView.selectedProduct.nombre}" required="true"/>
                             </div>
                             <div class="p-field">
                                 <p:outputLabel for="description">Description</p:outputLabel>
-                                <p:inputTextarea id="description" value="#{crudView.selectedProduct.description}"/>
+                                <p:inputTextarea id="description" value="#{crudView.selectedProduct.descripcion}"/>
                             </div>
                             <div class="p-field">
                                 <p:outputLabel for="category">Category</p:outputLabel>
-                                <p:selectOneRadio id="category" value="#{crudView.selectedProduct.category}"
+                                <p:selectOneRadio id="category" value="#{crudView.selectedProduct.categoria}"
                                                   layout="responsive" columns="2">
                                     <f:selectItem itemLabel="Accessories" itemValue="Accessories"/>
                                     <f:selectItem itemLabel="Clothing" itemValue="Clothing"/>
@@ -134,13 +133,13 @@ and open the template in the editor.
                             <div class="p-formgrid p-grid">
                                 <div class="p-field p-col">
                                     <p:outputLabel for="price">Price</p:outputLabel>
-                                    <p:inputNumber id="price" value="#{crudView.selectedProduct.price}"
+                                    <p:inputNumber id="price" value="#{crudView.selectedProduct.precio}"
                                                    symbol=" USD" symbolPosition="s"
                                                    decimalSeparator="." thousandSeparator=","/>
                                 </div>
                                 <div class="p-field p-col">
                                     <p:outputLabel for="quantity">Quantity</p:outputLabel>
-                                    <p:spinner id="quantity" min="0" value="#{crudView.selectedProduct.quantity}"/>
+                                    <p:spinner id="quantity" min="0" value="#{crudView.selectedProduct.cantidad}"/>
                                 </div>
                             </div>
                         </p:outputPanel>

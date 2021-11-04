@@ -26,7 +26,7 @@ public class ProductService {
 
     private List<Product> products;
 
-    @PostConstruct
+   /* @PostConstruct
     public void init() {
         products = new ArrayList<>();
         products.add(new Product(1000, "f230fh0g3", "Bamboo Watch", "Product Description", "bamboo-watch.jpg", 65,
@@ -123,5 +123,5 @@ public class ProductService {
             results.add(original.clone());
         }
         return results;
-    }
+    }*/
 }

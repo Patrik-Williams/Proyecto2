@@ -7,6 +7,7 @@ package com.ulatina.controller;
 
 import com.ulatina.model.Product;
 import com.ulatina.service.ProductService;
+import com.ulatina.service.ServicioProducto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +33,24 @@ public class CarouselView implements Serializable {
 
     private List<ResponsiveOption> responsiveOptions;
 
-    @ManagedProperty("#{productService}")
-    private ProductService service;
+    @ManagedProperty("#{servicioProducto}")
+    private ServicioProducto servicio;
 
     @PostConstruct
     public void init() {
-        products = service.getProducts(9);
+        products = servicio.demeTodosProductos();
         responsiveOptions = new ArrayList<>();
         responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
         responsiveOptions.add(new ResponsiveOption("768px", 2, 2));
         responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public ServicioProducto getService() {
+        return servicio;
     }
     
     
@@ -71,8 +80,16 @@ public class CarouselView implements Serializable {
         return products;
     }
 
-    public void setService(ProductService service) {
-        this.service = service;
+    public void setService(ServicioProducto servicio) {
+        this.servicio = servicio;
+    }
+
+    public ServicioProducto getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(ServicioProducto servicio) {
+        this.servicio = servicio;
     }
 
     public List<ResponsiveOption> getResponsiveOptions() {

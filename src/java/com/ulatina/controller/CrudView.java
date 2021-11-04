@@ -7,6 +7,7 @@ package com.ulatina.controller;
 
 import com.ulatina.model.Product;
 import com.ulatina.service.ProductService;
+import com.ulatina.service.ServicioProducto;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -32,22 +33,26 @@ public class CrudView implements Serializable {
 
     private List<Product> selectedProducts;
 
-    @ManagedProperty("#{productService}")
-    private ProductService productService;
-
-    public ProductService getProductService() {
-        return productService;
-    }
-
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
+    ServicioProducto sp = new ServicioProducto();
+    
+    
+    @ManagedProperty("#{servicioProducto}")
+    private ServicioProducto servicioProducto;
+    
     @PostConstruct
     public void init() {
-        this.products = this.productService.getClonedProducts(100);
+        //this.products = this.productService.getClonedProducts(29);
+        this.products = this.servicioProducto.demeTodosProductos();
     }
 
+    public ServicioProducto getServicioProducto() {
+        return servicioProducto;
+    }
+
+    public void setServicioProducto(ServicioProducto servicioProducto) {
+        this.servicioProducto = servicioProducto;
+    }
+    
     public List<Product> getProducts() {
         return products;
     }
@@ -73,10 +78,13 @@ public class CrudView implements Serializable {
     }
 
     public void saveProduct() {
-        if (this.selectedProduct.getCode() == null) {
-            this.selectedProduct.setCode(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.products.add(this.selectedProduct);
+        if (this.selectedProduct.getCodigo() == null) {
+            this.selectedProduct.setCodigo(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+            System.out.println(""+selectedProduct.getNombre());
+            sp.insertar(selectedProduct);
+            this.init();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
+         
         }
         else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Updated"));
@@ -85,6 +93,7 @@ public class CrudView implements Serializable {
         PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
     }
+
 
     public void deleteProduct() {
         this.products.remove(this.selectedProduct);
