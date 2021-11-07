@@ -19,19 +19,34 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.model.ResponsiveOption;
-
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import com.ulatina.service.Servicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 /**
  *
  * @author Ian
  */
 @ManagedBean(name = "carouselView")
 @SessionScoped
-public class CarouselView implements Serializable {
+public class CarouselView extends Servicio implements Serializable {
 
     private List<Product> products;
 
     private List<ResponsiveOption> responsiveOptions;
+    
+    private String prod; 
+
+    public String getProd() {
+        return prod;
+    }
+
+    public void setProd(String prod) {
+        this.prod = prod;
+    }
 
     @ManagedProperty("#{servicioProducto}")
     private ServicioProducto servicio;
@@ -65,7 +80,7 @@ public class CarouselView implements Serializable {
         this.redireccionar("/faces/LogIn.xhtml");
 
     }
-
+  
     public void redireccionar(String ruta) {
         HttpServletRequest request;
         try {
@@ -75,6 +90,12 @@ public class CarouselView implements Serializable {
 
         }
     }
+    
+    
+
+    
+    
+    
     
     public List<Product> getProducts() {
         return products;

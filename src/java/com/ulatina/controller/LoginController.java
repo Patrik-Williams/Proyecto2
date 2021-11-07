@@ -148,5 +148,7 @@ public class LoginController extends Servicio implements Serializable {
     public void setContrasenna(String contrasenna) {
         this.contrasenna = contrasenna;
     }
+    
+    
 
 }

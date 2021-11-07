@@ -15,19 +15,62 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form id="form">
-            <div class="card crud-demo">
+             <p:growl id="growl" showDetail="false" />
+
+            <div class="card">
+
+                <p:sidebar widgetVar="sidebar1">
+
+                    <h3>Opciones</h3>
+
+
+
+                </p:sidebar>
+                <p:commandButton icon="pi pi-bars" type="button" onclick="PF('sidebar1').show()" styleClass="p-mr-2" />
+
+
+            </div>
+
+
+            <div class="card crud-demo" style = "position:relative; left:0px; top:10px;">
                 <p:growl id="messages" showDetail="true"/>
 
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="New" icon="pi pi-plus" actionListener="#{crudView.openNew}"
-                                         update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()"
-                                         styleClass="ui-button-success" style="margin-right: .5rem">
-                            <p:resetInput target=":form:manage-product-content"/>
-                        </p:commandButton>
+
+                        <p:commandButton value="New" type="button" icon="pi pi-plus" actionListener="#{crudView.openNew}" onclick="PF('dlg2').show()" styleClass="ui-button-success" style="margin-right: .5rem" />
+
+                        <p:dialog header="Agregar" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true">
+                            
+                            <h:panelGrid columns="2" cellpadding="10" >
+                            <p class="p-m-0">
+                                Nombre:
+                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.nombre}" required="true" requiredMessage="El nombre es requerido"/>
+                                Marca: 
+                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.marca}"  required="true" requiredMessage="La marca es requerida"/>
+                                Descripcion: 
+                                <p:inputTextarea style="width: 150px" value="#{crudView.selectedProduct.descripcion}" required="true" requiredMessage="La descripción es"/>
+                             
+                                Categoria: 
+                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.categoria}" required="true" requiredMessage="Debe ingresar una categoría"/>
+                                Precio: 
+                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.precio}" required="true" requiredMessage="Debe ingresar un precio" />
+                                
+                                <p:outputLabel for="quantity">Cantidad:</p:outputLabel>
+                                <p:spinner id="quantity" min="0" value="#{crudView.selectedProduct.cantidad}" style="width: 150px"  required="true" requiredMessage="Debe ingresar una cantidad"   />
+                                
+                                
+                                <p:commandButton  value="Agregar" update="growl"/>
+                                
+                            </p>
+                            </h:panelGrid>  
+                        </p:dialog>
+
+
+
                         <p:commandButton id="delete-products-button" value="#{crudView.deleteButtonMessage}"
                                          icon="pi pi-trash" actionListener="#{crudView.deleteSelectedProducts}"
-                                         styleClass="ui-button-danger" disabled="#{!crudView.hasSelectedProducts()}"
+                                         styleClass="ui-button-danger" disabled="#{crudView.hasSelectedProducts()}"
                                          update="@this">
                             <p:confirm header="Confirmation" message="Delete the selected products?"
                                        icon="pi pi-exclamation-triangle"/>
@@ -40,6 +83,9 @@ and open the template in the editor.
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
+
+
+
 
                 <p:dataTable id="dt-products" widgetVar="dtProducts" var="product" value="#{crudView.products}"
                              reflow="true" styleClass="products-table"

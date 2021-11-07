@@ -29,34 +29,34 @@
         <h:form id="formIan">
 
             <p:panel id="panel" styleClass="p-mb-3">
-                
-                
-                
-                
+
+
+
+
                 <center>
-                    
+
                     <h:panelGrid columns="10" >  
-                        
-                        
+
+
                         <p:commandButton icon="pi pi-user" styleClass="rounded-button ui-button-info ui-button-outlined" actionListener = "#{carouselView.ingresar}" />
-                        
+
                         <p:inputText id="txt1" value="#{searchView.text1}" style="width: 24rem">
                             <f:validateLength minimum="2"/>   
                         </p:inputText>
-                        
 
-                        <p:button icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" />
+
+                        <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" actionListener = "#{carouselView.ingresar}" />
 
 
                     </h:panelGrid>
                 </center>    
-                    
-                    <p:message for="txt1"/>
-                    <h:outputText value="#{searchView.text1}"/>
-                    <p:message for="@previous"/>
-                    <h:outputText value="#{searchView.text2}"/>
 
-                
+                <p:message for="txt1"/>
+                <h:outputText value="#{searchView.text1}"/>
+                <p:message for="@previous"/>
+                <h:outputText value="#{searchView.text2}"/>
+
+
             </p:panel>
 
 
@@ -87,35 +87,100 @@
 
 
             <div class="card">
-        <p:carousel value="#{carouselView.products}" var="product" circular="true" autoplayInterval="3000"
-                    responsiveOptions="#{carouselView.responsiveOptions}" numVisible="3" numScroll="1">
- 
-            <div class="product-item">
-                <div class="product-item-content">
-                    <div class="p-mb-3">
-                        <p:graphicImage name="demo/images/product/#{product.image}" styleClass="product-image"/>
-                    </div>
-                    <div>
-                        <h4 class="p-mb-1">#{product.nombre}</h4>
-                        <h6 class="p-mt-0 p-mb-3">
-                            <h:outputText value="#{product.precio}">
-                                <f:convertNumber type="currency" pattern="¤#0" currencySymbol="$" />
-                            </h:outputText>
-                        </h6>
-                        <span class="product-badge status-#{product.cantidad}">#{product.cantidad}</span>
-                        <div class="p-mt-5">
-                            <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button p-mr-2" />
-                            <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button p-mr-2" />
-                            <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+                <p:carousel value="#{carouselView.products}" var="product" circular="true" autoplayInterval="3000"
+                            responsiveOptions="#{carouselView.responsiveOptions}" numVisible="3" numScroll="1">
+
+                    <div class="product-item">
+                        <div class="product-item-content">
+                            <div class="p-mb-3">
+                                <p:graphicImage name="demo/images/product/#{product.image}" styleClass="product-image"/>
+                            </div>
+                            <div>
+                                <h4 class="p-mb-1">#{product.nombre}</h4>
+                                <h6 class="p-mt-0 p-mb-3">
+                                    <h:outputText value="#{product.precio}">
+                                        <f:convertNumber type="currency" pattern="¤#0" currencySymbol="$" />
+                                    </h:outputText>
+                                </h6>
+                                <span class="product-badge status-#{product.cantidad}">#{product.cantidad}</span>
+                                <div class="p-mt-5">
+                                    <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button p-mr-2" />
+                                    <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button p-mr-2" />
+                                    <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </p:carousel>
             </div>
-        </p:carousel>
-    </div>
 
 
         </h:form>
+
+
+
+        <div class="product card">
+            <h:form id="form">
+                <p:dataView var="product" value="#{dataGridView.products}" rows="12" paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                            gridIcon="pi pi-th-large" listIcon="pi pi-bars"
+                            layout="grid" gridRowStyleClass="p-lg-6 p-xl-4" flex="true">
+
+                    <p:dataViewGridItem>
+                        <div class="product-grid-item card border-1">
+                            <div class="product-grid-item-top">
+                                <div>
+                                    <i class="pi pi-tag product-category-icon"/>
+                                    <span class="product-category">#{product.categoria}</span>
+                                </div>
+                                <span class="product-badge status-#{product.cantidad}">#{product.cantidad}</span>
+                            </div>
+                            <div class="product-grid-item-content">
+                                
+                                <div class="product-name">#{product.nombre}</div>
+                                <div class="product-description">#{product.descripcion}</div>
+                                <p readonly="true" value="#{product.marca}"/>
+                            </div>
+                            <div class="product-grid-item-bottom">
+                                <h:outputText value="#{product.precio}" styleClass="product-price">
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                                <p:commandButton type="button"
+                                                 value="Add To Cart"
+                                                 icon="pi pi-shopping-cart"
+                                                 disabled="#{product.cantidad == 0}">
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </p:dataViewGridItem>
+
+                    <p:dataViewListItem>
+                        <div class="product-list-item">
+                            
+                            <div class="product-list-detail">
+                                <div class="product-name">#{product.nombre}</div>
+                                <div class="product-description">#{product.descripcion}</div>
+                                <p:rating readonly="true" value="#{product.marca}"/>
+                                <i class="pi pi-tag product-category-icon"/><span
+                                    class="product-category">#{product.categoria}</span>
+                            </div>
+                            <div class="product-list-action">
+                                <h:outputText value="#{product.precio}" styleClass="product-price">
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                                <p:commandButton type="button"
+                                                 value="Add To Cart"
+                                                 icon="pi pi-shopping-cart"
+                                                 disabled="#{product.cantidad == 0}">
+                                </p:commandButton>
+                                <span class="product-badge status-#{product.cantidad}">#{product.cantidad}</span>
+                            </div>
+                        </div>
+                    </p:dataViewListItem>
+                </p:dataView>
+
+            </h:form>
+        </div>
 
     </h:body>
 </html>

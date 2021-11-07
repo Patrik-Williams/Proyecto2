@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title> E-Comerce </title>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            .product-item .product-item-content {
+                border: 1px solid var(--surface-d);
+                border-radius: 3px;
+                margin: .3rem;
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .product-item .product-image {
+                width: 50%;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+            }
+        </style>
+
+        <h:form id="formIan">
+
+            <p:panel id="panel" styleClass="p-mb-3">
+
+
+
+
+                <center>
+
+                    <h:panelGrid columns="10" >  
+
+
+                        <p:commandButton icon="pi pi-user" styleClass="rounded-button ui-button-info ui-button-outlined" actionListener = "#{carouselView.ingresar}" />
+
+                        <p:inputText id="txt1" value="#{searchView.text1}" style="width: 24rem">
+                            <f:validateLength minimum="2"/>   
+                        </p:inputText>
+
+
+                        <p:button icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" />
+
+
+                    </h:panelGrid>
+                </center>    
+
+                <p:message for="txt1"/>
+                <h:outputText value="#{searchView.text1}"/>
+                <p:message for="@previous"/>
+                <h:outputText value="#{searchView.text2}"/>
+
+            </p:panel>
+
+        </h:form>
+
+        <div class="card">
+            <h:form>
+                <p:dataScroller value="#{dataScrollerView.products}" var="product" chunkSize="10">
+                    <f:facet name="header">
+                        Scroll Down to Load More Products
+                    </f:facet>
+
+                    <div class="product">
+                        <div class="product-list-item p-p-5">
+                            <p:graphicImage name="demo/images/product/#{product.image}"/>
+                            <div class="product-list-detail">
+                                <div class="product-name">#{product.nombre}</div>
+                                <div class="product-description">#{product.descripcion}</div>
+                                <div class="product-name">#{product.marca}</div>
+                                <i class="pi pi-tag product-category-icon"/><span
+                                    class="product-category">#{product.categoria}</span>
+                            </div>
+                            <div class="product-list-action">
+                                <h:outputText value="#{product.precio}" styleClass="product-price">
+                                    <f:convertNumber currencySymbol="$" type="currency"/>
+                                </h:outputText>
+                                <p:commandButton value="Add To Cart" icon="pi pi-shopping-cart"
+                                                 disabled="#{product.cantidad == 0}">
+                                </p:commandButton>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </p:dataScroller>
+            </h:form>
+        </div>
+
+
+    </h:body>
+</html>

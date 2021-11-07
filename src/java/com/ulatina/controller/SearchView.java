@@ -35,5 +35,9 @@ public class SearchView {
     public void setText2(String text2) {
         this.text2 = text2;
     }
+    
+    
+    
+    
 }
 
