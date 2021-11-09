@@ -5,9 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title> E-Comerce </title>
+        <title>Facelet Title</title>
         
-        <link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-32x32.png.xhtml" rel="icon" type="image/png" sizes="32x32"/>
+<link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-32x32.png.xhtml" rel="icon" type="image/png" sizes="32x32"/>
 <link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-16x16.png.xhtml" rel="icon" type="image/png" sizes="16x16"/>
 <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/theme.css.xhtml?ln=primefaces-saga&amp;v=11.0.0-RC2"/>
 <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&amp;v=11.0.0-RC2"/>
@@ -19,41 +19,38 @@
         
     </h:head>
     <h:body>
- 
-      
-
+        .......
         <div class="card">
             <h:form>
-                <p:dataScroller value="#{dataScrollerView.products}" var="product" chunkSize="10">
+                <p:dataScroller value="#{dataScrollerView2.products}" var="miFilaDelProducto" chunkSize="10">
                     <f:facet name="header">
                         Scroll Down to Load More Products
                     </f:facet>
 
                     <div class="product">
                         <div class="product-list-item p-p-5">
-                            <p:graphicImage name="demo/images/product/#{product.image}"/>
+                            <p:graphicImage name="demo/images/product/#{miFilaDelProducto.image}"/>
                             <div class="product-list-detail">
-                                <div class="product-name">#{product.nombre}</div>
-                                <div class="product-description">#{product.descripcion}</div>
-                                <div class="product-name">#{product.marca}</div>
+                                <div class="product-name">#{miFilaDelProducto.name}</div>
+                                <div class="product-description">#{miFilaDelProducto.description}</div>
+                                <p:rating readonly="true" value="#{miFilaDelProducto.rating}"/>
                                 <i class="pi pi-tag product-category-icon"/><span
-                                    class="product-category">#{product.categoria}</span>
+                                    class="product-category">#{miFilaDelProducto.category}</span>
                             </div>
                             <div class="product-list-action">
-                                <h:outputText value="#{product.precio}" styleClass="product-price">
+                                <h:outputText value="#{miFilaDelProducto.price}" styleClass="product-price">
                                     <f:convertNumber currencySymbol="$" type="currency"/>
                                 </h:outputText>
                                 <p:commandButton value="Add To Cart" icon="pi pi-shopping-cart"
-                                                 disabled="#{product.cantidad == 0}">
+                                                 disabled="#{miFilaDelProducto.inventoryStatus == 'OUTOFSTOCK'}">
                                 </p:commandButton>
-                                
+                                <span class="product-badge status-#{miFilaDelProducto.inventoryStatus.name().toLowerCase()}">#{miFilaDelProducto.inventoryStatus.text}</span>
                             </div>
                         </div>
                     </div>
                 </p:dataScroller>
             </h:form>
         </div>
-
 
     </h:body>
 </html>

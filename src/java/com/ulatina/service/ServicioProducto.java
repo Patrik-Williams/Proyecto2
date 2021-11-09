@@ -133,4 +133,45 @@ public class ServicioProducto extends Servicio {
         }
 
     }
+    
+    public List<Product> buscar(String prod) {
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Product> listaRetorno = new ArrayList<>();
+
+        try {
+
+            //Paso 3
+            stmt = super.getConexion().createStatement();
+            String sql = "SELECT * FROM producto where nombre like '%"+ prod +" %'";
+            //Paso 4
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Product p = new Product();
+                String en = "";
+                //p.setId(rs.getInt("id"));
+                p.setCodigo(rs.getString("codigo"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDescripcion(rs.getString("marca"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setCategoria(rs.getString("categoria"));
+                p.setPrecio(rs.getDouble("precio"));
+                listaRetorno.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //Paso 5
+            cerrarResultSet(rs);
+            cerrarStatement(stmt);
+            desconectar();
+        }
+        return listaRetorno;
+    }
+    
+    
+    
 }
