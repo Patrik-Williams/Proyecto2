@@ -22,7 +22,7 @@ public abstract class Servicio {
     private String puerto = "3306";
     private String sid = "proyecto2";
     private String usuario = "root";
-    private String clave = "1234";
+    private String clave = "jphe";
     
     
     
