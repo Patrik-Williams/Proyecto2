@@ -7,6 +7,7 @@ package com.ulatina.service;
 
 import com.ulatina.model.InventoryStatus;
 import com.ulatina.model.Product;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 @ManagedBean(name = "servicioProducto")
 @ApplicationScoped
-public class ServicioProducto extends Servicio {
+public class ServicioProducto extends Servicio implements Serializable{
 
     public List<Product> demeTodosProductos() {
 
@@ -71,7 +72,7 @@ public class ServicioProducto extends Servicio {
             //Paso 3
             stmt = super.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String sql = "SELECT * FROM products";   
+            String sql = "SELECT * FROM producto";   
             //Paso 4
            
             rs = stmt.executeQuery(sql);
@@ -110,7 +111,7 @@ public class ServicioProducto extends Servicio {
             //Paso 3
             stmt = super.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String sql = "SELECT * FROM products";
+            String sql = "SELECT * FROM producto";
             //String sql = "SELECT id FROM products WHERE code = "+p.getCode();
            
             //Paso 4
@@ -134,8 +135,9 @@ public class ServicioProducto extends Servicio {
 
     }
     
-    public List<Product> buscar(String prod) {
-
+    public List<Product> buscar(String producto ) {
+        
+        System.out.println(""+producto);
         Statement stmt = null;
         ResultSet rs = null;
         List<Product> listaRetorno = new ArrayList<>();
@@ -144,7 +146,7 @@ public class ServicioProducto extends Servicio {
 
             //Paso 3
             stmt = super.getConexion().createStatement();
-            String sql = "SELECT * FROM producto where nombre like '%"+ prod +" %'";
+            String sql = "SELECT * FROM producto where nombre like '%"+producto+"%'";
             //Paso 4
             rs = stmt.executeQuery(sql);
 

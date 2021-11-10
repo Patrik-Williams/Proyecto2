@@ -39,18 +39,18 @@
                         <p:commandButton icon="pi pi-user" styleClass="rounded-button ui-button-info ui-button-outlined" actionListener = "#{carouselView.ingresar}" />
 
                         <p:inputText id="txt1" value="#{searchView.text1}" style="width: 24rem">
-                            <f:validateLength minimum="2"/>   
+                            <f:validateLength minimum="1"/>   
                         </p:inputText>
 
 
-                        <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" actionListener = "#{carouselView.ingresar}" />
+                        <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" actionListener = "#{searchView.search()}" />
 
 
                     </h:panelGrid>
                 </center>    
 
-                <p:message for="txt1"/>
-                <h:outputText value="#{searchView.text1}"/>
+               
+                
                 <p:message for="@previous"/>
                 <h:outputText value="#{searchView.text2}"/>
 

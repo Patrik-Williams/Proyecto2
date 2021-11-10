@@ -38,34 +38,11 @@ and open the template in the editor.
                 <p:toolbar>
                     <p:toolbarGroup>
 
-                        <p:commandButton value="New" type="button" icon="pi pi-plus" actionListener="#{crudView.openNew}" onclick="PF('dlg2').show()" styleClass="ui-button-success" style="margin-right: .5rem" />
-
-                        <p:dialog header="Agregar" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true">
-                            
-                            <h:panelGrid columns="2" cellpadding="10" >
-                            <p class="p-m-0">
-                                Nombre:
-                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.nombre}" required="true" requiredMessage="El nombre es requerido"/>
-                                Marca: 
-                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.marca}"  required="true" requiredMessage="La marca es requerida"/>
-                                Descripcion: 
-                                <p:inputTextarea style="width: 150px" value="#{crudView.selectedProduct.descripcion}" required="true" requiredMessage="La descripción es"/>
-                             
-                                Categoria: 
-                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.categoria}" required="true" requiredMessage="Debe ingresar una categoría"/>
-                                Precio: 
-                                <p:inputText style="width: 150px" value="#{crudView.selectedProduct.precio}" required="true" requiredMessage="Debe ingresar un precio" />
-                                
-                                <p:outputLabel for="quantity">Cantidad:</p:outputLabel>
-                                <p:spinner id="quantity" min="0" value="#{crudView.selectedProduct.cantidad}" style="width: 150px"  required="true" requiredMessage="Debe ingresar una cantidad"   />
-                                
-                                
-                                <p:commandButton  value="Agregar" update="growl"/>
-                                
-                            </p>
-                            </h:panelGrid>  
-                        </p:dialog>
-
+                             <p:commandButton value="New" icon="pi pi-plus" actionListener="#{crudView.openNew}"
+                                         update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()"
+                                         styleClass="ui-button-success" style="margin-right: .5rem">
+                            <p:resetInput target=":form:manage-product-content"/>
+                        </p:commandButton>
 
 
                         <p:commandButton id="delete-products-button" value="#{crudView.deleteButtonMessage}"
@@ -167,7 +144,7 @@ and open the template in the editor.
                                 <p:inputTextarea id="description" value="#{crudView.selectedProduct.descripcion}"/>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="category">Category</p:outputLabel>
+                                <p:outputLabel for="categoria">Category</p:outputLabel>
                                 <p:selectOneRadio id="category" value="#{crudView.selectedProduct.categoria}"
                                                   layout="responsive" columns="2">
                                     <f:selectItem itemLabel="Accessories" itemValue="Accessories"/>
@@ -178,13 +155,13 @@ and open the template in the editor.
                             </div>
                             <div class="p-formgrid p-grid">
                                 <div class="p-field p-col">
-                                    <p:outputLabel for="price">Price</p:outputLabel>
+                                    <p:outputLabel for="price">Precio</p:outputLabel>
                                     <p:inputNumber id="price" value="#{crudView.selectedProduct.precio}"
                                                    symbol=" USD" symbolPosition="s"
                                                    decimalSeparator="." thousandSeparator=","/>
                                 </div>
                                 <div class="p-field p-col">
-                                    <p:outputLabel for="quantity">Quantity</p:outputLabel>
+                                    <p:outputLabel for="quantity">Cantidad</p:outputLabel>
                                     <p:spinner id="quantity" min="0" value="#{crudView.selectedProduct.cantidad}"/>
                                 </div>
                             </div>

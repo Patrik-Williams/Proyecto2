@@ -38,15 +38,10 @@ public class CarouselView extends Servicio implements Serializable {
 
     private List<ResponsiveOption> responsiveOptions;
     
-    private String prod; 
+    
+    
+    
 
-    public String getProd() {
-        return prod;
-    }
-
-    public void setProd(String prod) {
-        this.prod = prod;
-    }
 
     @ManagedProperty("#{servicioProducto}")
     private ServicioProducto servicio;
@@ -91,12 +86,7 @@ public class CarouselView extends Servicio implements Serializable {
         }
     }
     
-    
 
-    
-    
-    
-    
     public List<Product> getProducts() {
         return products;
     }

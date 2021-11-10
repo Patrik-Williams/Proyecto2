@@ -6,22 +6,54 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title> E-Comerce </title>
-        
+
         <link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-32x32.png.xhtml" rel="icon" type="image/png" sizes="32x32"/>
-<link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-16x16.png.xhtml" rel="icon" type="image/png" sizes="16x16"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/theme.css.xhtml?ln=primefaces-saga&amp;v=11.0.0-RC2"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&amp;v=11.0.0-RC2"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/primeflex.css.xhtml?ln=showcase"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/flags/flags.css.xhtml?ln=showcase"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/components.css.xhtml?ln=primefaces&amp;v=11.0.0-RC2"/>
-<link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/layout/layout.css.xhtml?ln=showcase"/>
-        
-        
+        <link href="https://www.primefaces.org/showcase/javax.faces.resource/showcase/images/favicon-16x16.png.xhtml" rel="icon" type="image/png" sizes="16x16"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/theme.css.xhtml?ln=primefaces-saga&amp;v=11.0.0-RC2"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&amp;v=11.0.0-RC2"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/primeflex.css.xhtml?ln=showcase"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/flags/flags.css.xhtml?ln=showcase"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/components.css.xhtml?ln=primefaces&amp;v=11.0.0-RC2"/>
+        <link type="text/css" rel="stylesheet" href="https://www.primefaces.org/showcase/javax.faces.resource/css/layout/layout.css.xhtml?ln=showcase"/>
+
+
     </h:head>
     <h:body>
- 
-      
 
+        <h:form id="formIan">
+            <p:panel id="panel" styleClass="p-mb-3">
+
+
+
+
+                <center>
+
+                    <h:panelGrid columns="10" >  
+
+
+                        <p:commandButton icon="pi pi-user" styleClass="rounded-button ui-button-info ui-button-outlined" actionListener = "#{carouselView.ingresar}" />
+
+                        <p:inputText id="txt1" value="#{searchView.text1}" style="width: 24rem">
+                            <f:validateLength minimum="2"/>   
+                        </p:inputText>
+
+
+                        <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-flat ui-button-plain" actionListener = "#{searchView.search()}" />
+
+
+                    </h:panelGrid>
+                </center>    
+
+                <p:message for="txt1"/>
+         
+                <p:message for="@previous"/>
+                <h:outputText value="#{searchView.text2}"/>
+
+
+            </p:panel>
+        </h:form>
+        
+        
         <div class="card">
             <h:form>
                 <p:dataScroller value="#{dataScrollerView.products}" var="product" chunkSize="10">
@@ -46,7 +78,7 @@
                                 <p:commandButton value="Add To Cart" icon="pi pi-shopping-cart"
                                                  disabled="#{product.cantidad == 0}">
                                 </p:commandButton>
-                                
+
                             </div>
                         </div>
                     </div>

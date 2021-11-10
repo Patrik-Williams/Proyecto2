@@ -13,15 +13,41 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+//import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author Ian
  */
 @ManagedBean(name = "dataScrollerView")
-@ViewScoped
+@SessionScoped
 public class DataScrollerView implements Serializable {
+
+    private String search ;
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+    
+    @ManagedProperty("#{servicioProducto}")
+    private ServicioProducto servicio;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("" + search);
+        products = servicio.buscar(search);
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
     public ServicioProducto getServicio() {
         return servicio;
@@ -33,14 +59,6 @@ public class DataScrollerView implements Serializable {
 
     private List<Product> products;
 
-    @ManagedProperty("#{servicioProducto}")
-    private ServicioProducto servicio;
-
-    @PostConstruct
-    public void init() {
-        products = servicio.demeTodosProductos();
-    }
-
     public List<Product> getProducts() {
         return products;
     }
@@ -48,5 +66,5 @@ public class DataScrollerView implements Serializable {
     public void setService(ServicioProducto servicio) {
         this.servicio = servicio;
     }
-    
+
 }
