@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class DataScrollerView implements Serializable {
 
-    private String search ;
+    private String search =  "Ha";
 
     public void setProducts(List<Product> products) {
         this.products = products;

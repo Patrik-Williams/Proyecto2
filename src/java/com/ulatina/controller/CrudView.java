@@ -74,14 +74,18 @@ public class CrudView implements Serializable {
     }
 
     public void openNew() {
+     
         this.selectedProduct = new Product();
     }
 
     public void saveProduct() {
+     
         if (this.selectedProduct.getCodigo() == null) {
             this.selectedProduct.setCodigo(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
             System.out.println(""+selectedProduct.getNombre());
             sp.insertar(selectedProduct);
+              this.servicioProducto.Insert(this.selectedProduct);
+              this.products.add(this.selectedProduct);
             this.init();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
          
@@ -96,6 +100,7 @@ public class CrudView implements Serializable {
 
 
     public void deleteProduct() {
+        this.servicioProducto.EliminarP(this.selectedProduct);
         this.products.remove(this.selectedProduct);
         this.selectedProduct = null;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Removed"));
@@ -116,11 +121,23 @@ public class CrudView implements Serializable {
     }
 
     public void deleteSelectedProducts() {
+        for (Product producto : this.selectedProducts){
+        
+        this.servicioProducto.EliminarP(producto);
+        }
         this.products.removeAll(this.selectedProducts);
         this.selectedProducts = null;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Products Removed"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
         PrimeFaces.current().executeScript("PF('dtProducts').clearFilters()");
+    }
+
+    public ServicioProducto getSp() {
+        return sp;
+    }
+
+    public void setSp(ServicioProducto sp) {
+        this.sp = sp;
     }
 
 }

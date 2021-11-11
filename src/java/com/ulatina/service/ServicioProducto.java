@@ -174,6 +174,42 @@ public class ServicioProducto extends Servicio implements Serializable{
         return listaRetorno;
     }
     
-    
-    
+     public void EliminarP(Product producto) {
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = super.getConexion().createStatement();
+            String sql = "DELETE FROM producto WHERE codigo = '" + producto.getCodigo() + "'";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+            super.cerrarResultSet(rs);
+            super.cerrarStatement(stmt);
+
+        }
+    } 
+     
+    public void Insert(Product producto) {
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = super.getConexion().createStatement();
+            String sql;
+
+            sql = "INSERT INTO producto VALUES('"+producto.getCodigo()+"', '"+producto.getNombre()+"', '"+producto.getMarca()+"'), '"+producto.getDescripcion()+"', "+producto.getCantidad()+", '"+producto.getCategoria()+"', "+producto.getPrecio()+"";
+            stmt.executeUpdate(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            super.cerrarResultSet(rs);
+            super.cerrarStatement(stmt);
+        }
+    }
 }
